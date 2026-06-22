@@ -5,7 +5,35 @@
     state: present
 
 # Create config file
+- name: Generate btrbk config
+  ansible.builtin.template:
+    dest: /etc/btrbk/btrbk.conf
+    owner: root
+    src: templates/btrbk.conf.j2
 
 # Create systemd units
+- name: Create systemd override directory
+  ansible.builtin.file:
+    path: /etc/systemd/system/btrbk.timer.d
+    state: directory
+    mode: "0755"
+
+- name: Override btrbk timer schedule
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/btrbk.timer.d/override.conf
+    mode: "0644"
+    content: |
+      [Timer]
+      OnCalendar=
+      OnCalendar={{ btrbk_oncalendar }}
+  notify:
+    - reload systemd
+    - restart btrbk timer
+
 
 # Start the service/timer
+- name: Enable and start btrbk timer
+  ansible.builtin.systemd:
+    name: btrbk.timer
+    enabled: true
+    state: started
