@@ -1,0 +1,30 @@
+---
+- name: Installing btrbk
+  package:
+    name: btrbk
+    state: present
+
+- name: Create btrbk conf directory
+  ansible.builtin.file:
+    dest: /etc/btrbk/conf.d
+    state: directory
+    owner: root
+
+- name: Basic btrbk config
+  ansible.builtin.copy:
+    dest: /etc/btrbk/btrbk.conf
+    content: |
+      # Global settings
+      timestamp_format long
+      snapshot_preserve 7d
+      snapshot_preserve_min latest
+
+      # Import additional configs
+      include /etc/btrbk/conf.d/*.conf
+    owner: root
+
+- name: copy btrbk config files
+  copy:
+    src: '.'
+    dest: '/etc/btrbk/conf.d/'
+
