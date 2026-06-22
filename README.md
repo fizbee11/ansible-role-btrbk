@@ -1,7 +1,7 @@
 # ansible-role-btrbk
 Ansible Role to install and configure btrbk.
 
-> [!note] Note
+> [!NOTE] Note
 > SSH Connection for remote volumes/targets to be ensured separately.
 
 ## Example
