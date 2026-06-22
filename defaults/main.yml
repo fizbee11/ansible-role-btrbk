@@ -8,3 +8,4 @@ btrbk_snapshot_preserve: "48h 7d 0w 0m 0y"
 
 btrbk_target_preserve_min: no
 btrbk_target_preserve: "48h 7d 2w 0m 0y"
+btrbk_volumes: []
