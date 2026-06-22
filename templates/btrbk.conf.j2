@@ -76,7 +76,6 @@ snapshot_dir               {{ btrbk_snapshot_dir }}
 snapshot_preserve_min   {{ btrbk_snapshot_preserve_min }}
 snapshot_preserve       {{ btrbk_snapshot_preserve }}
 
-target_preserve_min     {{ btrbk_target_preserve_min }}
 target_preserve         {{ btrbk_target_preserve }}
 
 
@@ -87,13 +86,11 @@ volume {{ volume.path }}
 snapshot_dir {{ volume.snapshot_dir }}
 {% endif %}
 
+target {{ volume.target }}
 {% for subvol in volume.subvolumes | default([]) %}
-subvolume {{ subvol.name }}
+subvolume {{ subvol }}
 {% if subvol.snapshot_name is defined %}
 snapshot_name {{ subvol.snapshot_name }}
-{% endif %}
-{% if subvol.target is defined %}
-target {{ subvol.target }}
 {% endif %}
 {% endfor %}
 
