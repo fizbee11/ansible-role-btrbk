@@ -1,0 +1,10 @@
+---
+btrbk_ssh_user: root
+
+btrbk_snapshot_dir: _btrbk_snap
+
+btrbk_snapshot_preserve_min: 2d
+btrbk_snapshot_preserve: "48h 7d 0w 0m 0y"
+
+btrbk_target_preserve_min: no
+btrbk_target_preserve: "48h 7d 2w 0m 0y"
